@@ -216,7 +216,12 @@ void assertRankEquals(unsigned long actual, unsigned long expected)
 
 void testGetRank()
 {
-    // ....
+    skiplist *sl = createSkipListSample();
+
+    unsigned long rank = getRank(sl, 25, "");
+    assert(rank == 25);
+
+    printf("testGetRank passed\n");
 }
 
 void testPrintRangeByScore()

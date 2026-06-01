@@ -277,7 +277,23 @@ char *printToStringFull(skiplist *pList)
 
 unsigned long getRank(skiplist *pList, double score, char *str)
 {
-    // ...
+    skipListNode *x = pList->header;
+    unsinged long rank = 0;
+
+    for (int i = pList->level - 1; i >= 0; i--) {
+        skipListNode *next = NULL;
+        while (1) {
+            next = x->level[i].forward;
+            if (next && cmpNodes(next, score, str) <= 0) {
+                rank += x->level[i].span;
+                x = next;
+            } else {
+                break;
+            }
+        }
+    }
+
+    return rank;
 }
 
 void printRangeByScore(skiplist *sl, double min, double max)
